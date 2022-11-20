@@ -10,6 +10,7 @@ orbs:
 jobs:
   run_api_tests:
     executor: node/default
+    working_directory: /tmp-api
     steps:
       - checkout
       - node/install-packages:
@@ -22,7 +23,6 @@ jobs:
           name: run api tests
       - store_artifacts:
           path: /api-report
-          destination: index.html
       - store_test_results:
           path: api-results.xml
   run_e2e_tests:
@@ -38,7 +38,6 @@ jobs:
           command: npm run-script e2e
       - store_artifacts:
           path: /e2e-report
-          destination: index.html
       - store_test_results:
           path: e2e-results.xml
 

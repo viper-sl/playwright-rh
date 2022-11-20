@@ -43,9 +43,9 @@ export abstract class BasePage {
     async scrollToPageBottom() {
         await this.page.evaluate(async () => {
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-            for (let i = 0; i < document.body.scrollHeight; i += 200) {
+            for (let i = 0; i < document.body.scrollHeight; i += 150) {
                 window.scrollTo(0, i);
-                await delay(50);
+                await delay(20);
             }
         });
     }
