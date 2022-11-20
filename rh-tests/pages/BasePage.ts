@@ -46,7 +46,7 @@ export abstract class BasePage {
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
             for (let i = 0; i < document.body.scrollHeight; i += this.isMobile ? 150 : 200) {
                 window.scrollTo(0, i);
-                await delay(this.isMobile ? 25 : 70);
+                await delay(20);
             }
         });
     }

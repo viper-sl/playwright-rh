@@ -40,7 +40,7 @@ export class HomePage extends BasePage {
 
     async waitForIt() {
         await this.scrollToPageBottom();
-        await this.checkElementsVisibility([this.headerNav, this.mainContent]);
+        await this.checkElementsVisibility([this.headerNav, this.mainContent, this.footer]);
         return this;
     }
 
