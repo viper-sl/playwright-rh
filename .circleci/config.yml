@@ -23,7 +23,7 @@ jobs:
       - store_artifacts:
           path: /api-report
       - store_artifacts:
-          path: ~/api-report
+          path: ~/project/api-report
           destination: artifacts
       - store_test_results:
           path: api-results.xml
@@ -39,7 +39,8 @@ jobs:
           name: Run test
           command: npm run-script e2e
       - store_artifacts:
-          path: /e2e-report
+          path: ~/project/e2e-report
+          destination: artifacts
       - store_test_results:
           path: e2e-results.xml
 
