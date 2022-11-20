@@ -1,4 +1,5 @@
 # Test task playwright-rh
+[![CircleCI](https://circleci.com/gh/viper-sl/playwright-rh.svg?style=svg)](https://circleci.com/gh/viper-sl/playwright-rh)
 ### Description
 
 UI and API tests. Written with pure Playwright framework
