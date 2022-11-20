@@ -1,0 +1,45 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.3
+jobs:
+  run_api_tests:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm install
+          name: install dependencies
+      - run:
+          command: npm run-script api
+          name: run api tests
+      - store_artifacts:
+          path: /api-report
+      - store_artifacts:
+          path: ~/project/api-report
+          destination: artifacts
+      - store_test_results:
+          path: api-results.xml
+  run_e2e_tests:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.23.1-focal
+    steps:
+      - checkout
+      - run: npm i -D @playwright/test
+      - run: npx playwright install
+      - run: npx playwright install chrome
+      - run:
+          name: Run test
+          command: npm run-script e2e
+      - store_artifacts:
+          path: ~/project/e2e-report
+          destination: artifacts
+      - store_test_results:
+          path: e2e-results.xml
+workflows:
+  tests-workflow:
+    jobs:
+      - run_api_tests
+      - run_e2e_tests
