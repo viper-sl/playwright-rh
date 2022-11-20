@@ -34,6 +34,7 @@ export abstract class BasePage {
     async closeBanner() {
         await expect(this.bannerModal).toBeVisible();
         await this.bannerModalClose.click();
+        await expect(this.bannerModal).not.toBeVisible();
     }
 
     async checkPageURL(url: string | RegExp) {
@@ -42,10 +43,10 @@ export abstract class BasePage {
 
     async scrollToPageBottom() {
         await this.page.evaluate(async () => {
-            const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-            for (let i = 0; i < document.body.scrollHeight; i += this.isMobile ? 100 : 150) {
+            const delay = async ms => await new Promise(async resolve => setTimeout(resolve, ms));
+            for (let i = 0; i < document.body.scrollHeight; i += this.isMobile ? 100 : 200) {
                 window.scrollTo(0, i);
-                await delay(50);
+                await delay(20);
             }
         });
     }
