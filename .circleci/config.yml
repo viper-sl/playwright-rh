@@ -2,25 +2,41 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.3
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  run_api_tests:
+    executor: node/default
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          command: npm install
+          name: install dependencies
+      - run:
+          command: npm run-script api
+          name: run api tests
+  run_e2e_tests:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm install
+          name: install dependencies
+      - run:
+          command: npm run-script e2e
+          name: run e2e tests
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  tests-workflow:
     jobs:
-      - say-hello
+      - run_api_tests
+      - run_e2e_tests
