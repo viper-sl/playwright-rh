@@ -30,3 +30,9 @@ Console output provides simple description of ran tests.
 HTML report can be found in:
 - `./api-report` for API tests
 - `./e2e-report` for UI tests
+
+To serve HTML report run `npm run-script e2e-report`
+
+### CI/CD
+
+CI/CD config can be found here: `.circleci/config.yml`
