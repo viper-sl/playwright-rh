@@ -20,6 +20,7 @@ const config: PlaywrightTestConfig = {
     actionTimeout: 0,
     baseURL: 'https://qa.awarasleep.com/',
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure'
   },
 
   projects: [
