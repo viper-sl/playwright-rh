@@ -10,7 +10,6 @@ orbs:
 jobs:
   run_api_tests:
     executor: node/default
-    working_directory: /tmp-api
     steps:
       - checkout
       - node/install-packages:
