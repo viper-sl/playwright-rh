@@ -21,17 +21,18 @@ jobs:
           command: npm run-script api
           name: run api tests
   run_e2e_tests:
-    executor: node/default
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.23.1-focal
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
+      - run: npm i -D @playwright/test
+      - run: npx playwright install
+      - run: npx playwright install chrome
       - run:
-          command: npm install
-          name: install dependencies
-      - run:
+          name: Run test
           command: npm run-script e2e
-          name: run e2e tests
+      - store_test_results:
+          path: ./e2e-report
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
