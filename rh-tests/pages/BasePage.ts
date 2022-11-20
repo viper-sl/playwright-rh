@@ -27,7 +27,6 @@ export abstract class BasePage {
 
     async checkElementsVisibility(el: Locator[]) {
         for (const e of el) {
-            await e.scrollIntoViewIfNeeded();
             await expect(e).toBeVisible();
         }
     }
@@ -46,7 +45,7 @@ export abstract class BasePage {
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
             for (let i = 0; i < document.body.scrollHeight; i += this.isMobile ? 150 : 200) {
                 window.scrollTo(0, i);
-                await delay(20);
+                await delay(30);
             }
         });
     }
