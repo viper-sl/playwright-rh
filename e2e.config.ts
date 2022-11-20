@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'e2e-report' }], ['junit', { outputFile: 'e2e-results.xml' }]],
   use: {
-    headless: true,
+    headless: false,
     actionTimeout: 0,
     baseURL: 'https://qa.awarasleep.com/',
     trace: 'on-first-retry',
