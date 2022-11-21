@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {BasePage} from "./BasePage";
 
 export class CartPage extends BasePage {
@@ -19,7 +19,7 @@ export class CartPage extends BasePage {
 
     async checkMattressInCart(productId) {
         this.addedCartItem = this.page.getByTestId(productId);
-        await this.addedCartItem.isVisible();
+        await expect(this.addedCartItem).toBeVisible();
     }
 
     async waitForIt() {
