@@ -40,16 +40,19 @@ export class HomePage extends BasePage {
 
     async waitForIt() {
         await this.scrollToPageBottom();
-        await this.checkElementsVisibility([this.headerNav, this.mainContent, this.footer]);
+        await this.checkElementsVisibility([this.headerNav, this.mainContent,
+            this.footer
+        ]);
         return this;
     }
 
     async checkAllSectionsAreVisible() {
         await this.checkElementsVisibility(
-            [this.benefits, this.reviews, this.layers,
+            [
+                this.benefits, this.reviews, this.layers,
                 this.awards, this.materials, this.values,
-                this.natureCare, this.shopBest, this.newsletter,
-                this.paymentOptions]
+                this.natureCare, this.shopBest, this.newsletter, this.paymentOptions
+            ]
         );
         return this;
     }
