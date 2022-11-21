@@ -42,11 +42,12 @@ export abstract class BasePage {
     }
 
     async scrollToPageBottom() {
-        const that = this;
+        let height = this.page.viewportSize().height;
         const delay = async ms => await new Promise(async resolve => setTimeout(resolve, ms));
-        for (let i = 0; i < this.page.viewportSize().height; i += this.isMobile ? 100 : 200) {
-            await that.page.mouse.wheel(0, i);
-            await delay(20);
+        for (let i = 0; i < height; i += this.isMobile ? 100 : 200) {
+            await this.page.mouse.wheel(0, i);
+            await delay(100);
+            height = this.page.viewportSize().height;
         }
     }
 }
